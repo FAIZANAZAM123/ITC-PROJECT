@@ -1,294 +1,591 @@
-//AUTHORS NAME:FAIZAN AZAM
-//REGISTRATION NO:L1F20BSCS0550
-//SECTION:A-11
-//DATE:1/7/2021
-#include<iostream>
+// Term Project :- Educational Project.
+// Author Faizan Azam.
+// Reg NO L1F20BSCS0550
+// Date 1/31/2021.
+/*This is Educational Project that Develop by Noman Ali and Faizan Azam. If you have problem with Arithimatic. You can practice through this 
+programe to polish your arithimatic skills. Thanks */
+
+#include <iostream>
+#include <stdlib.h>
+#include <time.h>
 using namespace std;
-void input(int arr[][6], const int fields, const int tests);
-void display(int arr[][6], const int fields, const int tests);
-void menu();
-void insert_value_to_array(int arr[][6], const int fields, const int tests, int value);
-void count_test_scores(int arr[][6], const int fields, const int tests);
-void delete_value_from_array(int arr[][6], const int fields, const int tests, int new_value);
-void find_average_of_array(int arr[][6], const int fields, const int tests);
-void display_two_most_frequent_values(int arr[][6], const int fields, const int tests);
-void field_with_maximum_success_score(int arr[][6], const int fields, const int tests);
 int main()
 {
-	const int fields = 4;
-	const int tests = 6;
-	int arr[fields][tests];
-	cout << "ENTER THE ARRAY" << endl;
-	input(arr, fields, tests);
-	cout << endl;
-	do {
-		cout << "THE TABLE  IS : " << endl;
-		display(arr, fields, tests);
-		cout << endl;
-		int user = 0;
-		menu();
-		cin >> user;
-		if (user == 1)
+	int totalscore = 0; // to calculate total score of question.
+	int score = 0; // to calculate gain score of question.
+	cout << "*---------------------------------------------------*\n";
+	cout << "\n*\t   Educational Term Project!                *\n\n";
+	cout << "\n*\t Author : Noman Ali & Faizan Azam           *\n\n";
+	cout << "*---------------------------------------------------*\n";
+	char mainMenu = 0; // selection from MAIN MENU
+
+	while (mainMenu != 'Q' && mainMenu != 'q')
+	{
+		cout << "\nPlease make a selection from the following : \n"; // this is menu for selection what you want.
+		cout << "\nP : Practice Math : \n";
+		cout << "S : Show Score : \n";
+		cout << "Q : Quit : \n";
+		cin >> mainMenu;
+		if (mainMenu == 'P' || mainMenu == 'p')
 		{
-			int value = 0;
-			insert_value_to_array(arr, fields, tests, value);
-			cout << "PROGRAM IS SUCCESSFULLY EXECUTED " << endl;
-			cout << endl;
-			display(arr, fields, tests);
-			cout << endl;
-		}
-		if (user == 2)
+			char standard = 0; // For selecting Practice Questions level.
+				cout << "\n\nWhat difficult level do you want : \n"; // Thsi menu show the levels of  Easy Medium Hard.
+				cout << "E : Easy : \n";
+				cout << "M : Medium : \n";
+				cout << "H : Hard : \n";
+				cin >> standard;
+				if (standard == 'E' || standard == 'e') // This Section is for Easy Question.
+				{
+					totalscore = 0;
+					score = 0;
+					int Addition = 0;   // This Variable is use for Success Additon Questions
+					int totalAddition = 0;  // This Variable use for Total Number of Addition Question.
+					int subtraction = 0;  // This Variable is use for Success Subtraction Questions
+					int totalSubtraction = 0;  // This Variable use for Total Number of Subtraction Question.
+					int multiplication = 0;      // This Variable is use for Success Multiplication Questions
+					int totalMultiplication = 0;  // This Variable use for Total Number of Multiplication Question.
+					int division = 0;         // This Variable is use for Success Division Questions
+					int totalDivision = 0;   // This Variable use for Total Number of Division Question.
+					int numberOfQuestions = 0;  //This variable store number of question you want.
+					cout << "How many problems do you want : ";
+					cin >> numberOfQuestions;
+
+					int successAttempt = 0;  //This Variable store Success Attempt of Question
+					int correctAnswerForAddition = 0;   // this Variableis use to store Correct answer of Addition
+					for (int i = 1; i <= numberOfQuestions; i++)
+					{
+						srand(time(0)); // This Function is use to Generate Every Time Different Number.
+						int selectAns = 0;
+						int randomNumberOne = (rand() % 20) - 10;  // This Variable is to Generate Random Number From -10 to 10 as First Operand
+						int randomNumberTwo = (rand() % 20) - 10;  // This Variable is to Generate Random Number From -10 to 10 as Second Operand
+						// This Condition will Generate Multiplication Question.
+						if (randomNumberTwo >= 2 && randomNumberTwo <= 4)
+						{
+							int Answer = randomNumberOne * randomNumberTwo;
+							cout << "\nWhat is : " << randomNumberOne << " * " << randomNumberTwo << " = ";
+							cin >> selectAns;
+							if (selectAns == Answer)
+							{
+								multiplication++;
+								score += 2;
+								totalscore += 2;
+								totalMultiplication++;
+								cout << "\nCorrect, great job!\n";
+								successAttempt++;
+								correctAnswerForAddition++;
+							}
+							else
+							{
+								totalMultiplication++;
+								totalscore += 2;
+								cout << "\nSorry, that's incorrect, the answer is : " << Answer << "\n";
+							}
+						}
+						// // This Condition will Generate Subtraction Question.
+						else if (randomNumberTwo >= 4 && randomNumberTwo <= 6)
+						{
+							int Answer = randomNumberOne - randomNumberTwo;
+							cout << "\nWhat is : " << randomNumberOne << " - " << randomNumberTwo << " = ";
+							cin >> selectAns;
+							if (selectAns == Answer)
+							{
+								score += 2;
+								totalscore += 2;
+								subtraction++;
+								totalSubtraction++;
+								cout << "\nCorrect, great job!\n";
+								successAttempt++;
+								correctAnswerForAddition++;
+							}
+							else
+							{
+								totalSubtraction++;
+								totalscore += 2;
+								cout << "\nSorry, that's incorrect, the answer is : " << Answer << "\n";
+							}
+						}
+						// This Condition will Generate Division Question.
+
+						else if (randomNumberTwo >= 6 && randomNumberTwo <= 8)
+						{
+							if (randomNumberOne >= randomNumberTwo && randomNumberTwo != 0)
+							{
+								int Answer = randomNumberOne / randomNumberTwo;
+								cout << "\nWhat is : " << randomNumberOne << " / " << randomNumberTwo << " = ";
+								cin >> selectAns;
+								if (selectAns == Answer)
+								{
+									score += 2;
+									totalscore += 2;
+									division++;
+									totalDivision++;
+									cout << "\nCorrect, great job!\n";
+									successAttempt++;
+									correctAnswerForAddition++;
+								}
+								else
+								{
+									totalDivision++;
+									totalscore += 2;
+									cout << "\nSorry, t hat's incorrect, the answer is : " << Answer << "\n";
+								}
+							}
+							else
+							{
+								// // This Condition will Generate Addition Question.
+								int Answer = randomNumberOne + randomNumberTwo;
+								cout << "\nWhat is : " << randomNumberOne << " + " << randomNumberTwo << " = ";
+								cin >> selectAns;
+								if (selectAns == Answer)
+								{
+									score += 2;
+									totalscore += 2;
+									Addition++;
+									totalAddition++;
+									cout << "\nCorrect, great job!\n";
+									successAttempt++;
+									correctAnswerForAddition++;
+								}
+								else
+								{
+									totalAddition++;
+									totalscore += 2;
+									cout << "\nSorry, that's incorrect, the answer is : " << Answer << "\n";
+								}
+							}
+						}
+						// This Condition will Generate Addition Question.
+
+						else
+						{
+							int Answer = randomNumberOne + randomNumberTwo;
+							cout << "\nWhat is : " << randomNumberOne << " + " << randomNumberTwo << " = ";
+							cin >> selectAns;
+							if (selectAns == Answer)
+							{
+								score += 2;
+								totalscore += 2;
+								Addition++;
+								totalAddition++;
+								cout << "\nCorrect, great job!\n";
+								successAttempt++;
+								correctAnswerForAddition++;
+							}
+							else
+							{
+								totalAddition++;
+								totalscore += 2;
+								cout << "\nSorry, that's incorrect, the answer is : " << Answer << "\n";
+							}
+						}
+					}
+					// This Section wil Display the Progress of the User.
+					cout << "\nYour score is " << score << " / " << totalscore << endl;
+					cout << "\nYou got " << successAttempt << " / " << numberOfQuestions << " questions correct.\n";
+					cout << "\nAddition  Subtraction  Multiplication  Division \n";
+					cout << endl << Addition << " / " << totalAddition << "   " << subtraction << " / " << totalSubtraction << "   " << multiplication << " / " << totalMultiplication << "   " << division << " / " << totalDivision << endl;
+					// These condition will generate Suggestion for more parctice in specifice Arithimatic Problem.
+					if (Addition < totalAddition)
+					{
+						cout << "\nNeed more practice with Addition.\n";
+					}
+					if (subtraction < totalSubtraction)
+					{
+						cout << "\nNeed more practice with Subtraction\n";
+					}
+					if (multiplication < totalMultiplication)
+					{
+						cout << "\nNeed more practice with Multiplication\n";
+					}
+					if (division < totalDivision)
+					{
+						cout << "\nNeed more practice with Division\n";
+					}
+				}
+				// This Section is for Medium Question.
+				else
+
+				if (standard == 'M' || standard == 'm')
+				{
+					int numberOfQuestions = 0;   //This variable store number of question you want.
+
+					int Addition = 0;    // This Variable is use for Success Additon Questions
+					int totalAddition = 0;    // This Variable use for Total Number of Addition Question.
+
+					int subtraction = 0;    // This Variable is use for Success Subtraction Questions
+					int totalSubtraction = 0;   // This Variable use for Total Number of Subtraction Question.
+
+					int multiplication = 0;   // This Variable is use for Success Multiplication Questions
+					int totalMultiplication = 0;   // This Variable use for Total Number of Multiplication Question.
+
+					int division = 0;    // This Variable is use for Success Division Questions
+					int totalDivision = 0;  // This Variable use for Total Number of Division Question.
+
+					totalscore = 0;
+					score = 0;
+
+					cout << "How many problems do you want : ";
+					cin >> numberOfQuestions;
+
+					int successAttemptMedium = 0;
+					int correctAnswerForMedium = 0;
+
+					for (int i = 1; i <= numberOfQuestions; i++)
+					{
+						srand(time(0)); // This Function is use to Generate Every Time Different Number.
+						int selectAns = 0;
+						int randomNumberOne = (rand() % 100) - 50; // This Variable Will Generate Random Number From -50 to 50 as First Number. 
+						int randomNumberTwo = (rand() % 100) - 50; // This Variable Will Generate Random Number From -50 to 50 as Second Number.
+
+						// This Condition will Generate Multiplication Question.
+						if (randomNumberTwo >= 0 && randomNumberTwo <= 10)
+						{
+							int Answer = randomNumberOne * randomNumberTwo;
+							cout << "\nWhat is : " << randomNumberOne << " * " << randomNumberTwo << " = ";
+							cin >> selectAns;
+							if (selectAns == Answer)
+							{
+								score += 4;
+								totalscore += 4;
+								multiplication++;
+								totalMultiplication++;
+								cout << "\nCorrect, great job!\n";
+								successAttemptMedium++;
+								correctAnswerForMedium++;
+							}
+							else
+							{
+								totalMultiplication++;
+								totalscore += 4;
+								cout << "\nSorry, that's incorrect, the answer is : " << Answer << "\n";
+							}
+						}
+						// This Condition will Generate Subtraction Question.
+						else if (randomNumberTwo >= 0 && randomNumberTwo <= 20)
+						{
+							int Answer = randomNumberOne - randomNumberTwo;
+							cout << "\nWhat is : " << randomNumberOne << " - " << randomNumberTwo << " = ";
+							cin >> selectAns;
+							if (selectAns == Answer)
+							{
+								score += 4;
+								totalscore += 4;
+								subtraction++;
+								totalSubtraction++;
+								cout << "\nCorrect, great job!\n";
+								successAttemptMedium++;
+								correctAnswerForMedium++;
+							}
+							else
+							{
+								totalSubtraction++;
+								totalscore += 4;
+								cout << "\nSorry, that's incorrect, the answer is : " << Answer << "\n";
+							}
+						}
+
+						// This Condition will Generate Division Question.
+
+						else if (randomNumberTwo >= 30 && randomNumberTwo <= 40)
+						{
+							if (randomNumberOne >= randomNumberTwo && randomNumberTwo != 0)
+							{
+								int Answer = randomNumberOne / randomNumberTwo;
+								cout << "\nWhat is : " << randomNumberOne << " / " << randomNumberTwo << " = ";
+								cin >> selectAns;
+								if (selectAns == Answer)
+								{
+									score += 4;
+									totalscore += 4;
+									division++;
+									totalDivision++;
+									cout << "\nCorrect, great job!\n";
+									successAttemptMedium++;
+									correctAnswerForMedium++;
+								}
+								else
+								{
+									totalDivision++;
+									totalscore += 4;
+									cout << "\nSorry, that's incorrect, the answer is : " << Answer << "\n";
+								}
+							}
+							//// This Condition will Generate Addition Question.
+							else {
+								int Answer = randomNumberOne + randomNumberTwo;
+								cout << "\nWhat is : " << randomNumberOne << " + " << randomNumberTwo << " = ";
+								cin >> selectAns;
+								if (selectAns == Answer)
+								{
+									score += 4;
+									totalscore += 4;
+									Addition++;
+									totalAddition++;
+									cout << "\nCorrect, great job!\n";
+									successAttemptMedium++;
+									correctAnswerForMedium++;
+								}
+								else
+								{
+									totalAddition++;
+									totalscore += 4;
+									cout << "\nSorry, that's incorrect, the answer is : " << Answer << "\n";
+								}
+							}
+						}
+
+						// This Condition will Generate Addition Question.
+
+						else
+						{
+							int Answer = randomNumberOne + randomNumberTwo;
+							cout << "\nWhat is : " << randomNumberOne << " + " << randomNumberTwo << " = ";
+							cin >> selectAns;
+							if (selectAns == Answer)
+							{
+								score += 4;
+								totalscore += 4;
+								Addition++;
+								totalAddition++;
+								cout << "\nCorrect, great job!\n";
+								successAttemptMedium++;
+								correctAnswerForMedium++;
+							}
+							else
+							{
+								totalAddition++;
+								totalscore += 4;
+								cout << "\nSorry, that's incorrect, the answer is : " << Answer << "\n";
+							}
+						}
+					}
+					// This Section Will Display the progress of the User.
+					cout << "\nYour score is " << score << " / " << totalscore << endl;
+					cout << "\nYou got " << successAttemptMedium << " / " << numberOfQuestions << " questions correct.\n";
+					cout << "\nAddition  Subtraction  Multiplication  Division \n";
+					cout << endl << Addition << " / " << totalAddition << "   " << subtraction << " / " << totalSubtraction << "   " << multiplication << " / " << totalMultiplication << "   " << division << " / " << totalDivision << endl;
+					// These condition will generate Suggestion for more parctice in specifice Arithimatic Problem.
+					if (Addition < totalAddition)
+					{
+						cout << "\nNeed more practice with Addition.\n";
+					}
+					if (subtraction < totalSubtraction)
+					{
+						cout << "\nNeed more practice with Subtraction\n";
+					}
+					if (multiplication < totalMultiplication)
+					{
+						cout << "\nNeed more practice with Multiplication\n";
+					}
+					if (division < totalDivision)
+					{
+						cout << "\nNeed more practice with Division\n";
+					}
+				}
+				// This Section is for Medium Question.
+				else if (standard == 'H' || standard == 'h')
+				{
+					int numberOfQuestions = 0; //This variable store number of question you want.
+
+					int Addition = 0;   // This Variable is use for Success Additon Questions
+					int totalAddition = 0;   // This Variable use for Total Number of Addition Question.
+
+					int subtraction = 0;   // This Variable is use for Success Subtraction Questions
+					int totalSubtraction = 0;    // This Variable use for Total Number of Subtraction Question.
+
+					int multiplication = 0;  // This Variable is use for Success Multiplication Questions
+					int totalMultiplication = 0;   // This Variable use for Total Number of Multiplication Question.
+
+					int division = 0;     // This Variable is use for Success Division Questions
+					int totalDivision = 0;  // This Variable use for Total Number of Division Question.
+
+					totalscore = 0;
+					score = 0;
+
+					cout << "How many problems do you want : ";
+					cin >> numberOfQuestions;
+
+					int successAttemptHard = 0;
+					int correctAnswerForHard = 0;
+
+					for (int i = 1; i <= numberOfQuestions; i++)
+					{
+						srand(time(0));  // This Function is use to Generate Every Time Different Number.
+						int selectAns = 0;
+						int randomNumberOne = (rand() % 200) - 100; // This Variable will STore Random Number from -100 to 100 as First Number. 
+						int randomNumberTwo = (rand() % 200) - 100;  //// This Variable will STore Random Number from -100 to 100 as Second Number.
+
+						// This Section will Generate Addition Question. 
+						if (randomNumberTwo >= 20 && randomNumberTwo <= 40)
+						{
+							int Answer = randomNumberOne + randomNumberTwo;
+							cout << "\nWhat is : " << randomNumberOne << " + " << randomNumberTwo << " = ";
+							cin >> selectAns;
+							if (selectAns == Answer)
+							{
+								score += 5;
+								totalscore += 5;
+								Addition++;
+								totalAddition++;
+								cout << "\nCorrect, great job!\n";
+								successAttemptHard++;
+								correctAnswerForHard++;
+							}
+							else
+							{
+								totalAddition++;
+								totalscore += 5;
+								cout << "\nSorry, that's incorrect, the answer is : " << Answer << "\n";
+							}
+						}
+						// This Section will Generate Subtraction Question.
+						else if (randomNumberTwo >= 50 && randomNumberTwo <= 70)
+						{
+							int Answer = randomNumberOne - randomNumberTwo;
+							cout << "\nWhat is : " << randomNumberOne << " - " << randomNumberTwo << " = ";
+							cin >> selectAns;
+							if (selectAns == Answer)
+							{
+								score += 5;
+								totalscore += 5;
+								subtraction++;
+								totalSubtraction++;
+								cout << "\nCorrect, great job!\n";
+								successAttemptHard++;
+								correctAnswerForHard++;
+							}
+							else
+							{
+								totalSubtraction++;
+								totalscore += 5;
+								cout << "\nSorry, that's incorrect, the answer is : " << Answer << "\n";
+							}
+						}
+
+						// This Section will Generate Division Question.
+
+						else if (randomNumberTwo >= 80 && randomNumberTwo <= 100)
+						{
+							if (randomNumberOne >= randomNumberTwo && randomNumberTwo != 0)
+							{
+								int Answer = randomNumberOne / randomNumberTwo;
+								cout << "\nWhat is : " << randomNumberOne << " / " << randomNumberTwo << " = ";
+								cin >> selectAns;
+								if (selectAns == Answer)
+								{
+									score += 5;
+									totalscore += 5;
+									division++;
+									totalDivision++;
+									cout << "\nCorrect, great job!\n";
+									successAttemptHard++;
+									correctAnswerForHard++;
+								}
+								else
+								{
+									totalDivision++;
+									totalscore += 5;
+									cout << "\nSorry, that's incorrect, the answer is : " << Answer << "\n";
+								}
+							}
+							else {
+								// This Section will Generate Subtraction Question.
+								int Answer = randomNumberOne - randomNumberTwo;
+								cout << "\nWhat is : " << randomNumberOne << " - " << randomNumberTwo << " = ";
+								cin >> selectAns;
+								if (selectAns == Answer)
+								{
+									score += 5;
+									totalscore += 5;
+									subtraction++;
+									totalSubtraction++;
+									cout << "\nCorrect, great job!\n";
+									successAttemptHard++;
+									correctAnswerForHard++;
+								}
+								else
+								{
+									totalSubtraction++;
+									totalscore += 5;
+									cout << "\nSorry, that's incorrect, the answer is : " << Answer << "\n";
+								}
+							}
+						}
+
+						// This Section will Generate Multiplication Question.
+
+						else
+						{
+							int Answer = randomNumberOne * randomNumberTwo;
+							cout << "\nWhat is : " << randomNumberOne << " * " << randomNumberTwo << " = ";
+							cin >> selectAns;
+							if (selectAns == Answer)
+							{
+								score += 5;
+								totalscore += 5;
+								multiplication++;
+								totalMultiplication++;
+								cout << "\nCorrect, great job!\n";
+								successAttemptHard++;
+								correctAnswerForHard++;
+							}
+							else
+							{
+								totalMultiplication++;
+								totalscore += 5;
+								cout << "\nSorry, that's incorrect, the answer is : " << Answer << "\n";
+							}
+						}
+					}
+					// This Section will show the progress of the User.
+					cout << "\nYour score is " << score << " / " << totalscore << endl;
+					cout << "\nYou got " << successAttemptHard << " / " << numberOfQuestions << " questions correct.\n";
+					cout << "\nAddition  Subtraction  Multiplication  Division \n";
+					cout << endl << Addition << " / " << totalAddition << "   " << subtraction << " / " << totalSubtraction << "   " << multiplication << " / " << totalMultiplication << "   " << division << " / " << totalDivision << endl;
+					// These condition will generate Suggestion for more parctice in specifice Arithimatic Problem.
+					if (Addition < totalAddition)
+					{
+						cout << "\nNeed more practice with Addition.\n";
+					}
+					if (subtraction < totalSubtraction)
+					{
+						cout << "\nNeed more practice with Subtraction\n";
+					}
+					if (multiplication < totalMultiplication)
+					{
+						cout << "\nNeed more practice with Multiplication\n";
+					}
+					if (division < totalDivision)
+					{
+						cout << "\nNeed more practice with Division\n";
+					}
+				}
+				else {
+					cout << "\nInvalid InPut!\n";
+				}
+			}
+		else if (mainMenu == 'S' || mainMenu == 's') // This condition Show Last Score of the User
 		{
-			cout << "PROGRAM IS SUCCESSFULLY EXECUTED " << endl;
-			count_test_scores(arr, fields, tests);
+			if (totalscore == 0)
+			{
+				cout << "\nNo score found.!\n";
+			}
+			else 
+			{
+				cout << "\nYour last score was : " << score << " / " << totalscore << endl;
+			}
 		}
-		if (user == 3)
+		else if (mainMenu == 'Q' || mainMenu == 'q') // This condition is for terminate the programe
 		{
-			int new_value = 0;
-			cout << "PROGRAM IS SUCCESSFULLY EXECUTED " << endl;
-			delete_value_from_array(arr, fields, tests, new_value);
-			display(arr, fields, tests);
-			cout << endl;
+			cout << "\nThank you for practicing!\n";
+			return 0;
 		}
-		if (user == 4)
+		else // This part is for invalid input.if user enter.
 		{
-			cout << "PROGRAM IS SUCCESSFULLY EXECUTED " << endl;
-			display_two_most_frequent_values(arr, fields, tests);
-			cout << endl;
+			cout << "\nInvalid Input!\n";
 		}
-		if (user == 5)
-		{
-			cout << "PROGRAM IS SUCCESSFULLY EXECUTED " << endl;
-			find_average_of_array(arr, fields, tests);
-			cout << endl;
-		}
-		if (user == 6)
-		{
-			field_with_maximum_success_score(arr, fields, tests);
-			cout << endl;
-		}
-		if (user == 7)
-		{
-			cout << "**********************THANKYOU********************************";
-			break;
-		}
-	} while (1);
+	}
+
 
 	return 0;
-}
-void input(int arr[][6], const int fields, const int tests)
-{
-	for (int i = 0; i < fields; i++)
-	{
-		for (int j = 0; j < tests; j++)
-		{
-			cin >> arr[i][j];
-		}
-	}
-}
-void display(int arr[][6], const int fields, const int tests)
-{
-	for (int i = 0; i < fields; i++)
-	{
-		for (int j = 0; j < tests; j++)
-		{
-			cout << arr[i][j] << " ";
-		}
-		cout << endl;
-	}
-}
-void menu()
-{
-	cout << "Press 1 TO INSERT NEW RESULT" << endl;
-	cout << "Press 2 TO DISPLAY TOTAL NUMBER OF RESULTS IN TABLE." << endl;
-	cout << "Press 3 TO DELETE ANY TEST VALUE FROM TABLE." << endl;
-	cout << "Press 4 TO DISPLAY THE 2 MOST FREQUENT VALUES IN THE TABLE." << endl;
-	cout << "Press 5 TO DISPLAY AVERAGE SCORES OF EACH FIELD." << endl;
-	cout << "Press 6 TO DISPLAY FIELD HAVING MAXIMUM SCORE." << endl;
-	cout << "Press 7 TO EXIT THE PROGRAM " << endl;
-	cout << "ENTER YOUR CHOICE : ";
-}
-void insert_value_to_array(int arr[][6], const int fields, const int tests, int value)
-{
-	bool flag = 0;
-	cout << "ENTER THE VALUE YOU WANT TO INSERT " << endl;
-	cin >> value;
-	int loc = 0;
-	for (int i = 0; i < fields; i++)
-	{
-		for (int j = 0; j < tests; j++)
-		{
-			if (arr[i][j] == -1)
-			{
-				flag = 1;
-				arr[i][j] = value;
-				break;
-			}
-			loc++;
-		}
-		if (flag)
-		{
-			cout << value << " IS ENTERED IN FIELD " << i + 1 << " on location " << loc << endl;
-			break;
-		}
-	}
-}
-void count_test_scores(int arr[][6], const int fields, const int tests)
-{
-	int count = 0;
-	for (int i = 0; i < fields; i++)
-	{
-		for (int j = 0; j < tests; j++)
-		{
-			if (arr[i][j] != -1)
-			{
-				count++;
-			}
-		}
-	}
-	cout << "THERE ARE " << count << " TEST SCORES VALUES ENTERED IN THE TABLE" << endl;
-	cout << endl;
-}
-void delete_value_from_array(int arr[][6], const int fields, const int tests, int new_value)
-{
-	cout << "ENTER THE VALUE WHICH YOU WANT TO DELETE : " << endl;
-	cin >> new_value;
-	bool flag = 0;
-	int location = 0;
-	for (int i = 0; i < fields; i++)
-	{
-		for (int j = 0; j < tests; j++)
-		{
-			if (arr[i][j] == new_value)
-			{
-				flag = 1;
-				arr[i][j] = -1;
-				break;
-			}
-
-		}
-		if (flag)
-		{
-			break;
-		}
-	}
-}
-void find_average_of_array(int arr[][6], const int fields, const int tests)
-{
-	float sum1[4] = {};
-	int countarr = 0;
-	for (int i = 0; i < fields; i++)
-	{
-		for (int j = 0; j < tests; j++)
-		{
-			if (arr[i][j] != -1)
-			{
-				sum1[i] += arr[i][j];
-				countarr++;
-			}
-		}
-		float size[4];
-		size[i] = countarr;
-		countarr = 0;
-		float average_of_all[4];
-		average_of_all[i] = sum1[i] / size[i];
-		if (size[i] == 0)
-		{
-			cout << "THE FIELD " << i + 1 << " IS EMPTY " << endl;
-		}
-		else
-		{
-			cout << "THE AVERAGE SCORE OF THE FIELD " << i + 1 << " is " << average_of_all[i] << endl;;
-		}
-	}
-}
-void field_with_maximum_success_score(int arr[][6], const int fields, const int tests)
-{
-	int maximum_of_all = arr[0][0];
-	int index = 0;
-	for (int i = 0; i < fields; i++)
-	{
-		for (int j = 0; j < tests; j++)
-		{
-				if (arr[i][j] > maximum_of_all)
-				{
-					maximum_of_all = arr[i][j];
-
-					index = i;
-				}
-			}		
-	}
-	if (maximum_of_all > 0)
-	{
-		cout << "FIELD " << index + 1 << " have maximum value " << endl;
-	}
-	else
-	{
-		cout << "THERE IS NO MAXIMUM FIELD BECAUSE ALL THE FIELDS ARE EMPTY " << endl;
-	}
-}
-void display_two_most_frequent_values(int arr[][6], const int fields, const int tests)
-{
-	int temp = 0, temp_l = 0;
-	int first = 0;
-	int second = 0;
-	int firstno = 0;
-	int secondno = 0;
-	for (int f = 0; f < fields; f++)
-	{
-		for (int s = 0; s < tests; s++)
-		{
-			if (arr[f][s] != -1 && arr[f][s] != first)
-			{
-				temp = arr[f][s];
-				temp_l = 0;
-
-				for (int i = 0; i < fields; i++)
-				{
-					for (int j = 0; j < tests; j++)
-					{
-						if (temp == arr[i][j])
-						{
-							temp_l++;
-						}
-					}
-				}
-				if (temp_l > firstno)
-				{
-					first = temp;
-					firstno = temp_l;
-				}
-			}
-		}
-	}
-	temp = 0; temp_l = 0;
-	for (int f = 0; f < fields; f++)
-	{
-		for (int s = 0; s < tests; s++)
-		{
-			if (arr[f][s] != -1 && arr[f][s] != second && arr[f][s] != first)
-			{
-				temp = arr[f][s];
-				temp_l = 0;
-				for (int i = 0; i < fields; i++)
-				{
-					for (int j = 0; j < tests; j++)
-					{
-						if (temp == arr[i][j])
-						{
-							temp_l++;
-						}
-					}
-				}
-				if ((temp_l > secondno) && (secondno < firstno))
-				{
-					second = temp;
-					secondno = temp_l;
-				}
-			}
-		}
-	}
-	cout << first << " is  occurrence " << firstno << " times" << endl;
-	cout << second << " is  occurrence " << secondno << " times" << endl;
-	
 }
